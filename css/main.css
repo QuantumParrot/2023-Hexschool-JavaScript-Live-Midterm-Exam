@@ -302,7 +302,7 @@ select.form-input {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 50px;
   padding-bottom: 120px;
 }
 
