@@ -1,0 +1,43 @@
+/* font-size */
+
+.fs-30 {
+    font-size: 30px;
+  }
+
+.fs-32 {
+    font-size: 32px;
+}
+
+/* font-weight */
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+/* text-align */
+
+.text-end {
+    text-align: right;
+}
+
+@media (max-width: 417px) {
+    .text-sm-center {
+        text-align: center;
+    }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}

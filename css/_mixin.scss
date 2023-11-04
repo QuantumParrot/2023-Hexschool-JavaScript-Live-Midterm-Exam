@@ -1,0 +1,8 @@
+@mixin btn {
+    border-style: none;
+}
+
+@mixin box-shadow {
+    -webkit-box-shadow: 0px 3px 6px #00000029;
+            box-shadow: 0px 3px 6px #00000029;
+}
