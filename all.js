@@ -32,15 +32,21 @@ const data = [
 ];
 
 const list = document.querySelector('.ticket-list');
+const submit = document.querySelector('#submit');
+const filter = document.querySelector('#filter');
 
 function init(){
 
   // 練習 - 動態新增篩選地區
+
+  const areaList = ['台北','新北','基隆','桃園','新竹','苗栗','台中','彰化','南投','宜蘭','花蓮','台東','雲林','嘉義','台南','高雄','屏東','澎湖','金門','連江'];
   
+  // const area = new Set([...data].map(item => item.area));
+
   const areaSelectors = document.querySelectorAll('select[data-select="area"]');
-  const area = new Set([...data].map(item => item.area));
+
   let str = '';
-  area.forEach(item => str += `<option value="${item}">${item}</option>`);
+  areaList.forEach(item => str += `<option value="${item}">${item}</option>`);
   areaSelectors.forEach(selector => selector.innerHTML += str);
 
   renderData(data);
@@ -52,45 +58,42 @@ init();
 function renderData(data) {
 
   let str = '';
-  data.forEach(ticket => {
-  str += `
-  <li class="card">
-      <div class="card-header">
-          <div class="card-img">
-              <img class="ticket-image" src="${ticket.imgUrl}" alt="${ticket.name}">
-          </div>
-          <div class="ticket-info rate">${ticket.rate}</div>
-          <div class="ticket-info area">${ticket.area}</div>
-      </div>
-      <div class="card-body">
-          <div class="card-content">
-              <div class="card-title"><h2>${ticket.name}</h2></div>
-              <p>${ticket.description}</p>
-          </div>
-          <div class="card-footer fw-500">
-              <p class="ticket-group">
-                  <span class="material-icons">info</span>
-                  <span>剩下最後 ${ticket.group} 組</span>
-              </p>
-              <p class="ticket-price">
-                  <span>TWD</span>
-                  <span class="fs-32">${ticket.price}</span>
-              </p>
-          </div>
-      </div>
-  </li>
-  `})
-  list.innerHTML = str;
 
-  (function(){
-      name.value = '';
-      imgUrl.value = '';
-      area.value = '';
-      price.value = '';
-      group.value = '';
-      rate.value = '';
-      description.value = '';
-  })();
+  if (data.length == 0) {
+    str = `<li><p>查無此地區資料</p></li>`
+  } else {
+    data.forEach(ticket => {
+      str += `
+      <li class="card">
+          <div class="card-header">
+              <div class="card-img">
+                  <img class="ticket-image" src="${ticket.imgUrl}" alt="${ticket.name}">
+              </div>
+              <div class="ticket-info rate">${ticket.rate}</div>
+              <div class="ticket-info area">${ticket.area}</div>
+          </div>
+          <div class="card-body">
+              <div class="card-content">
+                  <div class="card-title"><h2>${ticket.name}</h2></div>
+                  <p>${ticket.description}</p>
+              </div>
+              <div class="card-footer fw-500">
+                  <p class="ticket-group">
+                      <span class="material-icons">info</span>
+                      <span>剩下最後 ${ticket.group} 組</span>
+                  </p>
+                  <p class="ticket-price">
+                      <span>TWD</span>
+                      <span class="fs-32">${ticket.price}</span>
+                  </p>
+              </div>
+          </div>
+      </li>
+      `
+    })
+  }
+
+  list.innerHTML = str;
 
   const message = document.querySelector('.filter-message');
   message.textContent = `本次搜尋共 ${data.length} 筆資料`;
@@ -98,8 +101,6 @@ function renderData(data) {
 }
 
 // 新增套票功能
-
-const submit = document.querySelector('#submit');
 
 submit.addEventListener('click', () => {
 
@@ -141,9 +142,8 @@ submit.addEventListener('click', () => {
       rate,
       description
     });
-
     message('success', '新增成功');
-    renderData(data);
+    createNewTicket(data);
   
   }
 
@@ -151,9 +151,14 @@ submit.addEventListener('click', () => {
 
 }, false);
 
-// 篩選地區功能
+function createNewTicket(data) {
+  const form = document.querySelector('#form');
+  form.reset();
+  filter.value = '全部地區';
+  renderData(data);
+}
 
-const filter = document.querySelector('#filter');
+// 篩選地區功能
 
 filter.addEventListener('change', function(e){
   const { value } = e.target;
