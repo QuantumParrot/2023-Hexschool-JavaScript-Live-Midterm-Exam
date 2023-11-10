@@ -403,4 +403,33 @@ select.form-input {
   }
 }
 
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  & img {
+    max-width: 50%;
+    padding-left: 2.5rem;
+  }
+}
+
+@media (max-width: 595px) {
+  .not-found {
+    & img {
+      max-width: 100%;
+      padding-left: 3rem;
+    }
+  }
+}
+
+@media (max-width: 595px) {
+  .not-found {
+    & img {
+      padding-left: 1.5rem;
+    }
+  }
+}
+
 /*# sourceMappingURL=main.css.map */

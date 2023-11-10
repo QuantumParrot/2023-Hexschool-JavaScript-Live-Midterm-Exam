@@ -60,7 +60,11 @@ function renderData(data) {
   let str = '';
 
   if (data.length == 0) {
-    str = `<li><p>查無此地區資料</p></li>`
+    str = `
+    <div class="container-sm not-found">
+        <h2 class="fw-700">查無此關鍵字資料</h2>
+        <img src="https://github.com/hexschool/2022-web-layout-training/blob/main/js_week5/no_found.png?raw=true" alt="Not Found">
+    </div>`
   } else {
     data.forEach(ticket => {
       str += `
