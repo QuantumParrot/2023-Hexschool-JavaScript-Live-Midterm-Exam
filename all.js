@@ -37,6 +37,8 @@ const list = document.querySelector('.ticket-list');
 const submit = document.querySelector('#submit');
 const filter = document.querySelector('#filter');
 
+let data = [];
+
 function init(){
 
   // 練習 - 動態新增篩選地區
@@ -58,7 +60,8 @@ function init(){
   axios.get(apiUrl)
   .then(res => {
     // console.log(res.data.data);
-    renderData(res.data.data);
+    data = res.data.data
+    renderData(data);
   })
   .catch(error => {
     console.log(error);
