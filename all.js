@@ -157,9 +157,9 @@ submit.addEventListener('click', () => {
       name,
       imgUrl: imgUrl.startsWith('https://') ? imgUrl : `https://fakeimg.pl/333x221/?text=${name}&font=noto`,
       area,
-      price,
-      group,
-      rate,
+      price: parseInt(price),
+      group: Number(group),
+      rate: +(rate),
       description
     });
     message('success', '新增成功');
