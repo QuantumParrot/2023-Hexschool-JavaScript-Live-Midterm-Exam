@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Travel！</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -86,16 +87,21 @@
         </section>
         <section class="display-ticket-area">
             <div class="container-sm">
-                <div class="filter-area">
-                    <select data-select="area" name="filter" id="filter" class="filter form-input">
-                        <option selected disabled>請選擇景點地區</option>
-                        <option value="全部地區">全部地區</option>
-                        <!--
-                        <option value="台北">台北</option>
-                        <option value="台中">台中</option>
-                        <option value="高雄">高雄</option> -->
-                    </select>
-                    <p class="filter-message"></p>
+                <div class="middle-area d-flex justify-content-between pb-56">
+                    <div class="filter-area">
+                        <select data-select="area" name="filter" id="filter" class="filter form-input">
+                            <option selected disabled>請選擇景點地區</option>
+                            <option value="全部地區">全部地區</option>
+                            <!--
+                            <option value="台北">台北</option>
+                            <option value="台中">台中</option>
+                            <option value="高雄">高雄</option> -->
+                        </select>
+                        <p class="filter-message"></p>
+                    </div>
+                    <div class="flex-grow-1 text-end">
+                        <div id="chart"></div>
+                    </div>
                 </div>
             </div>
             <div class="container-md">
@@ -103,6 +109,8 @@
             </div>
         </section>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="all.js"></script>

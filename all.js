@@ -59,13 +59,11 @@ function init(){
 
   axios.get(apiUrl)
   .then(res => {
-    // console.log(res.data.data);
-    data = res.data.data
+    data = res.data.data;
     renderData(data);
+    renderDonutChart(data);
   })
-  .catch(error => {
-    console.log(error);
-  })
+  .catch(error => { console.log(error) })
 
 };
 
@@ -171,11 +169,12 @@ submit.addEventListener('click', () => {
 
 }, false);
 
-function createNewTicket(data) {
+function createNewTicket() {
   const form = document.querySelector('#form');
   form.reset();
   filter.value = '全部地區';
   renderData(data);
+  renderDonutChart(data);
 }
 
 // 篩選地區功能
@@ -202,4 +201,30 @@ function message(icon, title) {
     showConfirmButton: false,
     timer: 1500,
   });
+}
+
+// WEEK 07 ( 篩選出核心的資訊 --> 做成套件要的格式 )
+
+function renderDonutChart(data) {
+
+  let total = {};
+  data.forEach(item => total[item.area] ? total[item.area] += 1 : total[item.area] = 1);
+  let chartData = [];
+  let areas = Object.keys(total);
+  areas.forEach(area => chartData.push([area, total[area]]));
+
+  const chart = c3.generate({
+    size: {
+      width: 200
+    },
+    data: {
+      columns: chartData,
+      type: 'donut',
+    },
+    donut: {
+      title: '套票地區比重'
+    }
+    
+  });
+
 }

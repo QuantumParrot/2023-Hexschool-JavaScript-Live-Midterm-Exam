@@ -1,8 +1,14 @@
+/* spacer */
+
+.pb-56 {
+    padding-bottom: 56px;
+}
+
 /* font-size */
 
 .fs-30 {
     font-size: 30px;
-  }
+}
 
 .fs-32 {
     font-size: 32px;
@@ -40,4 +46,8 @@
 
 .align-items-center {
     align-items: center;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
 }
