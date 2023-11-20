@@ -220,11 +220,19 @@ function renderDonutChart(data) {
     data: {
       columns: chartData,
       type: 'donut',
+      colors: {
+        '台北': '#26C0C7',
+        '台中': '#5151D3',
+        '高雄': '#E68618',
+      }
     },
     donut: {
-      title: '套票地區比重'
-    }
-    
+      title: '套票地區比重',
+      width: 20,
+      label: {
+        show: false,
+      }
+    },    
   });
 
 }
