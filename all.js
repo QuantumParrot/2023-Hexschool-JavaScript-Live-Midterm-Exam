@@ -33,8 +33,8 @@
 //     }
 // ];
 
+const form = document.querySelector('#form');
 const list = document.querySelector('.ticket-list');
-const submit = document.querySelector('#submit');
 const filter = document.querySelector('#filter');
 
 let data = [];
@@ -120,7 +120,9 @@ function renderData(data) {
 
 // 新增套票功能
 
-submit.addEventListener('click', () => {
+form.addEventListener('submit', (e) => {
+
+  e.preventDefault();
 
   let name = document.querySelector('#name').value;
   let imgUrl = document.querySelector('#imgUrl').value;
@@ -130,22 +132,77 @@ submit.addEventListener('click', () => {
   let rate = document.querySelector('#rate').value;
   let description = document.querySelector('#description').value;
 
-  function numberCheck(num) {
-    num = Number(num);
-    return num > 0 && Number.isInteger(num);
+  // function numberCheck(num) {
+  //   num = Number(num);
+  //   return num > 0 && Number.isInteger(num);
+  // }
+
+  // function check() {
+  //   if (!name || !area || !price || !group || !rate || !description) {
+  //     message('warning', '欄位不可空白');
+  //   } else if (!numberCheck(price) || !numberCheck(group) || !numberCheck(rate)) {
+  //     message('warning', '數字欄位請填寫不為零的正整數');
+  //   } else if (rate>10 || rate<0) {
+  //     message('warning', '星級範圍應為 1～10 之間')
+  //   } else {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+  // 利用 validate.js 驗證
+
+  const constraints = {
+    name: {
+      presence: {
+        message: '必填'
+      }
+    },
+    area: {
+      presence: {
+        message: '必選'
+      }
+    },
+    price: {
+      presence: {
+        message: '必填'
+      },
+      numericality: {
+        onlyInteger: true,
+        greaterThan: 0,
+        message: '請填寫不為零的正整數'
+      }
+    },
+    group: {
+      presence: {
+        message: '必填'
+      },
+      numericality: {
+        onlyInteger: true,
+        greaterThan: 0,
+        message: '請填寫不為零的正整數'
+      }
+    },
+    rate: {
+      presence: {
+        message: '必填'
+      },
+      numericality: {
+        onlyInteger: true,
+        greaterThanOrEqualTo: 1,
+        lessThanOrEqualTo: 10,
+        message: '星級範圍應為 1～10 之間的整數'
+      }
+    },
+    description: {
+      presence: {
+        message: '必填'
+      }
+    }
   }
 
-  function check() {
-    if (!name || !area || !price || !group || !rate || !description) {
-      message('warning', '欄位不可空白');
-    } else if (!numberCheck(price) || !numberCheck(group) || !numberCheck(rate)) {
-      message('warning', '數字欄位請填寫不為零的正整數');
-    } else if (rate>10 || rate<0) {
-      message('warning', '星級範圍應為 1～10 之間')
-    } else {
-      return true;
-    }
-    return false;
+  function messageReplace(arr) {
+    return arr[0].replace(/^[\w\s]+/,"");
   }
 
   function finished() {
@@ -165,9 +222,22 @@ submit.addEventListener('click', () => {
   
   }
 
-  return check() && finished();
+  const errors = validate(form, constraints);
+
+  if (errors) {
+
+    Object.keys(errors).forEach(key => {
+      const message = form.querySelector(`[name="${key}"]`).nextElementSibling;
+      message.textContent = messageReplace(errors[key]);
+    })
+
+  } else { finished() }
 
 }, false);
+
+form.addEventListener('input', (e) => {
+  e.target.nextElementSibling.textContent = '';
+})
 
 function createNewTicket() {
   const form = document.querySelector('#form');

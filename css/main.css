@@ -208,7 +208,7 @@ textarea {
 .form-control {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   gap: 30px;
   margin-bottom: 16px;
 }
@@ -227,11 +227,17 @@ textarea {
   color: #818A91;
   font-size: 16px;
   text-align: left;
+  margin-bottom: 16px;
 }
 
 select.form-input {
   text-indent: 8px;
   padding: 8px 12px 8px 0;
+}
+
+.message {
+  color: #C73E3A;
+  font-weight: bold;
 }
 
 .btn-primary {
