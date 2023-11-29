@@ -158,6 +158,12 @@ form.addEventListener('submit', (e) => {
         message: '必填'
       }
     },
+    imgUrl: {
+      url: {
+        schemes: ['http', 'https'],
+        message: '請填寫有效的網址'
+      }
+    },
     area: {
       presence: {
         message: '必選'
@@ -210,7 +216,7 @@ form.addEventListener('submit', (e) => {
     data.push({
       id: data[data.length-1].id+1,
       name,
-      imgUrl: imgUrl.startsWith('https://') ? imgUrl : `https://fakeimg.pl/333x221/?text=${name}&font=noto`,
+      imgUrl: imgUrl ? imgUrl : `https://fakeimg.pl/333x221/?text=${name}&font=noto`,
       area,
       price: parseInt(price),
       group: Number(group),
